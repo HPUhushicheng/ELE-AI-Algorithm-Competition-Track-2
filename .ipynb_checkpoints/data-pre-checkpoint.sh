@@ -1,0 +1,34 @@
+#代码中的路径问题还请酌情修改，有问题请及时联系我们
+
+#激活qwen2.5vl虚拟环境
+#conda activate qwen2.5vl
+
+# 新建images文件夹，下载官方提供的智慧骑士_train.zip和智慧骑士_label.zip 
+cd /root
+mkdir images
+cd images
+
+
+#下载智慧骑士数据集
+ossutil cp oss://tianchi-race-prod-sh/file/race/documents/prod/532324/1489/public/智慧骑士_train.zip ./智慧骑士_train.zip -i STS.NWiUGBGcrNrUkeeoJdfLyF2MG -k BRHGBDtm3uMK6TxyDDZLexexu8SuHuhZ6cRVGiAri4TN --endpoint=oss-cn-shanghai.aliyuncs.com --sts-token=CAISxQN1q6Ft5B2yfSjIr5TcHv32qrxT+bC+aUPUi0oxasNVqffmpTz2IHhPfHlpAe0Zs/Q/nWpW6PYclrhvQKhJTFDNacJ62ckMq1j7P9JYZiV+a+ZW5qe+EE2/VjQota27OpckJbGwU/OpbE++2U0X6LDmdDKkckW4OJmS8/BOZcgWWQ/KClgjA8xNdCRvtOgQN3baKYxHW3yMuGfLC1dysQdRkH527b/FoveR8R3Dllb3uOF3q436OcqjdNI+fsU9Acu01ep9dquEyidb5l1S7qB6ybdEvjnGutzaGVBa7lKKNOHJ99BpMBQ+frI9F+kZ96Knz6E/47CDxsPv1hxJPOoS3dUNym1vQQk9lShqAcojfLf9fWbMypKtTsCp6lp0MC1DbVsbJYR8eiJKZEZyGm2AGMiO40vXZwqvca+B3Zwt3IB9p1eSpoLRfwjWG+jGjHZIY8ViMRN2LWAK3GXnea8HNgBFb1p8CqrQUJ13axlSuXIgZPt0vYQKJBh1yB6eD5u+0sh3AQ5vTollZtlWLRLK596gq/gj11YCrgZ1EiIsCP0928K2QryEi8Tmi66wGqW9KZ1p9yscH3m/wCTlZ+1g73OZjrUagAFK20xGsIn2F0lzwIVyO37U0wIGzMeHZlRjpJbHdplaoFS1Vc2hm/JwKEB1cMXQun+E6I3r+TM45az62yUEwuSnUVj41zBMOdrqSUpWp/4zYsEs+h6pHKgYEN0EGEdWgOi/B+WZizPeOd2txKOjW9ah5UVoZtjtNODOxKoRNwx3bCAA
+
+unzip 智慧骑士_train.zip 
+
+# 下载智慧骑士_label.zip
+ossutil cp oss://tianchi-race-prod-sh/file/race/documents/prod/532324/1489/public/智慧骑士_label.zip ./智慧骑士_label.zip -i STS.NXHWQtUK1u1gjFGH8dfEvwCsc -k 4MJM7NqfZwqBo6hupbsMokzoEzqoBEqLGPDu5WSfF4wA --endpoint=oss-cn-shanghai.aliyuncs.com --sts-token=CAISxQN1q6Ft5B2yfSjIr5v9HOvAuJQQwvOMaGD2rDgxaspamIbYgTz2IHhPfHlpAe0Zs/Q/nWpW6PYclrhvQKhJTFDNacJ62ckMq1j7P9IkDS5+a+ZW5qe+EE2/VjQota27OpckJbGwU/OpbE++2U0X6LDmdDKkckW4OJmS8/BOZcgWWQ/KClgjA8xNdCRvtOgQN3baKYxHW3yMuGfLC1dysQdRkH527b/FoveR8R3Dllb3uOF3q436OcqjdNI+fsU9Acu01ep9dquEyidb5l1S7qB6ybdEvjnGutzaGVBa7lKKNOHJ99BpMBQ+frI9F+kZ96Knz6E/47CDxsPv1hxJPOoS3dUNym1vQQk9lShqAdIwf7v/fWbMypKtTsCp6lp0MC1DbVsbJYR8eiJKZEZyGm2AGMiO40vXZwqvca+B3Zwt3IB9p1eSpoLRfwjWG+jGjHZIY8ViMRN2LWAK3GXnea8HNgBFb1p8CqrQUJ13axlSuXIgZPt0vYQKJBh1yB6eD5u+0sh3AQ5/WyD5Tiw9hMcXlLR6BA2wHvn3sWX+n01F4Rb+YAFJlSUDQhMvYEUpzU5qMBkuW7i5WNB4RlvlwNBU0XOZjrUagAGet0g/Cu/YJ6JLDHfN7PXyT1s1T/jlHGLSdsEeTzSStIhYlhiGRUav4wWtjVL6pUHfskVR7I32u/dp4au62FvQJMtUK9rACxkntPgZj4Odr3ldd7lq53bNUdkBcmxy/N24M9F3mVjGf19r4eFYsBBX0Omtqk9ValmgJK7THEpjdSAA
+
+unzip 智慧骑士_label.zip
+
+
+# 删除错误图片/root/images/train/6c50c3dd380f8b04812c06362a1b9d64.jpg
+rm -rf /root/images/train/6c50c3dd380f8b04812c06362a1b9d64.jpg
+
+# 数据预处理，添加了大尺度缩放、随机旋转、颜色变换、随机Pad
+python /root/autodl-tmp/project/code/data_agu.py
+
+
+#构造LLaMA-Factory需要的多模态数据集格式
+python /root/autodl-tmp/project/code/dataset_qwen.py
+
+#需要将生成的aug.json在LLaMA-Factory/data/dataset_info.json中进行注册
+
