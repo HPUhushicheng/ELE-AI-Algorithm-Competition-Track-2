@@ -21,7 +21,7 @@
 
 ## 数据
 
-- 仅使用饿了么官方提供的数据作为训练和测试集，无额外的外部数据引用和扩充 (https://github.com/VisDrone/DroneVehicle)
+- 仅使用饿了么官方提供的数据作为训练和测试集，无额外的外部数据引用和扩充 
 
 ## 数据预处理
 - 使用多种数据增强手段对有限的图像进行增强
@@ -29,7 +29,7 @@
 
 ## 预训练模型
 
-- 使用Qwen/Qwen2.5-VL-7B-Instruct作为预训练模型，可通过(https://modelscope.cn/models/Qwen/Qwen2.5-VL-7B-Instruct)获得
+- 使用Qwen/Qwen2.5-VL-7B-Instruct作为预训练模型，可通过(https://modelscope.cn/models/Qwen/Qwen2.5-VL-7B-Instruct) 获得
 
 ## 算法
 
