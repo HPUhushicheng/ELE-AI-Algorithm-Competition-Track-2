@@ -1,4 +1,5 @@
 # ELE AI Algorithm Competition — Track 2
+<img width="2880" height="660" alt="image" src="https://github.com/user-attachments/assets/61ec3dcb-7409-4091-8aac-bd9583454dc4" />
 
 This repository contains the code, configuration, and notes for the Track 2 solution submitted to the ELE AI Algorithm Competition. The approach fine-tunes multimodal Qwen models using supervised fine-tuning (SFT) with LoRA and a progressive, risk-aware pipeline tailored for safety / hazard detection in images.
 
