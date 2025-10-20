@@ -1,3 +1,5 @@
+<img width="2880" height="660" alt="image" src="https://github.com/user-attachments/assets/61ec3dcb-7409-4091-8aac-bd9583454dc4" />
+
 # 代码说明
 
 ## 训练配置
