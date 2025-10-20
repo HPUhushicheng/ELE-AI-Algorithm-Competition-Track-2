@@ -5,6 +5,7 @@ This repository contains the code, configuration, and notes for the Track 2 solu
 
 ---
 
+[ English | **[中文](README_zh.md)** ]
 ## Table of Contents
 - Overview
 - Hardware & Software
